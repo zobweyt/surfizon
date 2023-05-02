@@ -1,0 +1,8 @@
+@use "sass:color";
+@use "base/variables";
+
+$contrast-percentage: 55%;
+
+@function contrast($color) {
+  @return if(color.lightness($color) > $contrast-percentage, variables.$dark, variables.$white);
+}

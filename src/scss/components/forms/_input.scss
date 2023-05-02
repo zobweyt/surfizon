@@ -1,0 +1,33 @@
+@use "base/variables" as *;
+@use "mixins/motion" as *;
+
+.form-control {
+  @include transition(color, background, box-shadow);
+
+  display: flex;
+  outline: none;
+  border-radius: $border-radius;
+  padding: map-get($spacers, 2) map-get($spacers, 3);
+  width: 100%;
+  line-height: $line-height-lg;
+  color: $dark;
+  background: $light;
+
+  &::placeholder {
+    color: $muted;
+  }
+
+  &:not(:placeholder-shown) {
+    box-shadow: inset 0 0 0 1px rgba($muted, 25%);
+    background: $white;
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 0 2px rgba($primary, 75%);
+    background: $white;
+  }
+
+  &:hover:not(&:focus) {
+    box-shadow: inset 0 0 0 1px rgba($muted, 25%);
+  }
+}

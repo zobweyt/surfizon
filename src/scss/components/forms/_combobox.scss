@@ -1,0 +1,27 @@
+@use "base/variables" as *;
+@use "mixins/icons" as *;
+
+.combobox {
+  .dropdown-toggle::after {
+    @include icon;
+
+    content: "\eb1d";
+  }
+
+  .dropdown-menu {
+    .dropdown-action {
+      &::after {
+        @include icon;
+
+        content: "";
+        display: inline-block;
+        margin-left: auto;
+      }
+
+      &.active::after {
+        content: "\ea5e";
+        color: $primary;
+      }
+    }
+  }
+}

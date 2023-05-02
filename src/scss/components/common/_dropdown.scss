@@ -1,0 +1,72 @@
+@use "base/variables" as *;
+@use "mixins/borders" as *;
+@use "mixins/motion" as *;
+
+.dropdown {
+  --menu-padding: #{map-get($spacers, 1)};
+  --item-padding: #{map-get($spacers, 2)};
+  --background-alpha: #{map-get($percentages, 3)};
+
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  .dropdown-menu {
+    @include border;
+    @include transition(scale, opacity, box-shadow, transform);
+
+    z-index: $zindex-dropdown;
+    border-radius: $border-radius;
+    padding: var(--menu-padding);
+    background: rgba($white, var(--background-alpha));
+    opacity: 0;
+    transform-origin: top left;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    scale: $component-active-scale;
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      border-radius: $border-radius;
+      padding: var(--item-padding);
+      gap: calc(var(--menu-padding) + var(--item-padding));
+
+      .icon {
+        color: $muted;
+      }
+    }
+
+    .dropdown-action {
+      @include transition(background, scale, opacity, outline);
+
+      color: inherit;
+      user-select: none;
+
+      &:hover,
+      &:focus-visible {
+        background: rgba($light, var(--background-alpha));
+      }
+
+      &:active {
+        opacity: $link-active-opacity;
+        scale: $component-active-scale;
+      }
+
+      &.active {
+        font-weight: 500;
+
+        .icon {
+          color: $black;
+        }
+      }
+    }
+
+    &.show {
+      box-shadow: $box-shadow-lg;
+      opacity: 1;
+      pointer-events: auto;
+      scale: 1;
+    }
+  }
+}

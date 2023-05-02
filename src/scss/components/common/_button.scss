@@ -1,0 +1,46 @@
+@use "base/variables" as *;
+@use "mixins/buttons" as *;
+@use "mixins/motion" as *;
+
+.btn {
+  @include button-variant($white, $muted);
+  @include transition(box-shadow, color, background, scale, outline);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius;
+  padding: map-get($spacers, 2) map-get($spacers, 3);
+  font-weight: 500;
+  line-height: $line-height-lg;
+  gap: map-get($spacers, 1);
+
+  // &:hover {
+  //   color: inherit;
+  // }
+
+  &:active {
+    opacity: 1;
+    scale: $component-active-scale;
+  }
+
+  &:disabled {
+    opacity: $component-disabled-opacity;
+    pointer-events: none;
+  }
+}
+
+.btn-icon {
+  padding-inline: map-get($spacers, 2) * $line-height-base;
+}
+
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value);
+  }
+}
+
+.btn-list {
+  display: flex;
+  gap: map-get($spacers, 1);
+}
