@@ -1,0 +1,135 @@
+/// Variables
+///
+/// All the variables must follow the `$component-state-property-size` formula for
+/// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+@use "sass:color";
+@use "sass:map";
+
+@import "https://fonts.cdnfonts.com/css/sf-pro-display";
+@import "https://fonts.cdnfonts.com/css/sf-mono";
+
+/// Typography
+///
+/// These include font families, weights, sizes, and line heights.
+
+$font-family-sans-serif: "SF Pro Display" !default;
+$font-family-monospace: "SF Mono" !default;
+$font-family-icons: "tabler-icons" !default;
+
+$font-weights: (
+  light: 300,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+) !default;
+
+$font-size-base: 1rem !default;
+$font-size-sm: $font-size-base * 0.625 !default;
+$font-size-lg: $font-size-base * 1.25 !default;
+
+$font-sizes: (
+  1: $font-size-base * 1.625,
+  2: $font-size-base * 1.5,
+  3: $font-size-base * 1.375,
+  4: $font-size-base * 1.25,
+  5: $font-size-base * 1.125,
+  6: $font-size-base,
+) !default;
+
+$line-height-base: 1.25 !default;
+$line-height-lg: 1.5 !default;
+
+/// Spacing
+///
+/// Control the default styling of most components by modifying these variables.
+/// The `$spacers` map must be used to create spacing for all the components.
+
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+) !default;
+
+/// Z-index master list
+///
+/// Warning: Avoid customizing these values. They're used for a bird's eye view
+/// of components dependent on the z-axis and are designed to all work together.
+
+$zindex-behind: -2 !default;
+$zindex-below: -1 !default;
+$zindex-base: 1 !default;
+$zindex-backdrop: 2 !default;
+$zindex-dropdown: 3 !default;
+$zindex-sticky: 4 !default;
+$zindex-fixed: 5 !default;
+$zindex-modal: 6 !default;
+$zindex-tooltip: 7 !default;
+$zindex-overlap: 8 !default;
+
+/// Color system
+///
+/// Theming, organizing and categorizing colors.
+
+$light: #f0f2f5 !default;
+$dark: #202333 !default;
+$muted: #909199 !default;
+$primary: #067aff !default;
+$white: #fff !default;
+$black: #000 !default;
+
+$theme-colors: (
+  dark: $dark,
+  light: $light,
+  primary: $primary,
+) !default;
+
+// TODO: Guess how to replace this.
+$percentages: (
+  1: 25%,
+  2: 50%,
+  3: 75%,
+);
+
+/// Borders
+
+$border-width: 1px;
+$border-color: rgba($muted, map.get($percentages, 1));
+
+$border-radius: map.get($spacers, 2);
+$border-radius-sm: map.get($spacers, 1);
+$border-radius-lg: map.get($spacers, 3);
+
+/// Motion variables
+///
+/// Includes everything that affects performance.
+
+$box-shadow: 0 2px 4px 0 rgba($dark, 2%), 0 1px 1px 0 rgba($dark, 4%);
+$box-shadow-lg: 0 2px 8px rgba($dark, 4%), 0 30px 70px rgba($dark, 8%);
+
+$transition-duration: 150ms;
+$transition-timing-function: cubic-bezier(0.4, 0, 0, 1);
+
+/// Components
+
+$component-active-scale: 0.96;
+$component-disabled-opacity: 0.75;
+
+/// Links
+
+$link-hover-lightness-scale-percentage: -40%;
+$link-hover-color: color.scale($primary, $lightness: $link-hover-lightness-scale-percentage);
+$link-active-opacity: 0.5;
+
+/// Icons
+
+$icon-size: $font-size-lg;
+
+/// Buttons
+
+$button-hover-lightness-scale-percentage: -10%;

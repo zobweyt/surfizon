@@ -1,0 +1,17 @@
+@use "base/variables";
+
+@mixin icon-font {
+  font-family: variables.$font-family-icons;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: variables.$icon-size;
+  line-height: 1;
+}
+
+@mixin icon {
+  @include icon-font;
+
+  vertical-align: middle;
+  width: variables.$icon-size;
+  height: variables.$icon-size;
+}

@@ -1,0 +1,16 @@
+@use "base/variables";
+@use "functions/shade";
+
+.badge {
+  display: inline-block;
+  border-radius: variables.$border-radius;
+  padding: map-get(variables.$spacers, 1) map-get(variables.$spacers, 2);
+  box-shadow: variables.$box-shadow;
+}
+
+@each $color, $value in variables.$theme-colors {
+  .badge--#{$color} {
+    color: shade.contrast($value);
+    background: rgba($value, 25%);
+  }
+}

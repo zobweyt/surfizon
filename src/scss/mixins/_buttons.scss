@@ -1,0 +1,17 @@
+@use "sass:color";
+@use "sass:map";
+@use "base/variables";
+@use "functions/shade";
+
+@mixin button-variant($color, $border-color: $color) {
+  box-shadow: inset 0 0 0 1px rgba($border-color, map.get(variables.$percentages, 1));
+  color: shade.contrast($color);
+  background: $color;
+
+  &.active,
+  &:hover,
+  &:focus-visible {
+    box-shadow: inset 0 0 0 1px rgba($border-color, map.get(variables.$percentages, 2));
+    background: color.scale($color, $lightness: variables.$button-hover-lightness-scale-percentage);
+  }
+}
