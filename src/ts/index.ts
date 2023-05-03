@@ -1,5 +1,5 @@
 import { Dropdown } from './components/dropdown';
-import { ComboBox } from './components/combobox';
+import { Select } from './components/select';
 
 document.querySelectorAll('.dropdown').forEach(el => new Dropdown(el as HTMLElement));
-document.querySelectorAll('select').forEach(el => new ComboBox(el))
+document.querySelectorAll('select').forEach(el => new Select(el))

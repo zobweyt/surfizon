@@ -1,29 +1,29 @@
 import { Dropdown } from './dropdown';
 import { wrap } from '../utils';
 
-export class ComboBox extends Dropdown {
+export class Select extends Dropdown {
     protected select!: HTMLSelectElement;
 
     private get template() {
         const options = this.select.querySelectorAll('option');
         const items = Array.from(options).map(option => `
-            <a href="#" class="dropdown-item dropdown-action" data-value="${option.value}">
+            <a href="#" class="dropdown__menu__item dropdown__menu__action" data-value="${option.value}">
                 <i class="icon ${option.dataset.icon}"></i>
                 <span>${option.textContent}</span>
             </a>`
         );
 
         return `
-        <button type="button" class="btn dropdown-toggle">
+        <button type="button" class="btn dropdown__toggle">
             ${this.select.dataset.placeholder}
         </button>
-        <div class="dropdown-menu">
+        <div class="dropdown__menu">
             ${items.join('')}
         </div>`;
     }
 
     constructor(target: HTMLSelectElement) {
-        super(wrap(target, 'combobox'));
+        super(wrap(target, 'select'));
     }
 
     protected render(): void {
@@ -38,13 +38,13 @@ export class ComboBox extends Dropdown {
     protected setup(): void {
         super.setup();
 
-        this.menu.querySelectorAll('.dropdown-action').forEach(option => {
+        this.menu.querySelectorAll('.dropdown__menu__action').forEach(option => {
             option.addEventListener('click', this.optionClicked.bind(this));
         });
     }
 
     private selectOption(option: HTMLElement) {
-        this.menu.querySelector('.dropdown-item.active')?.classList.remove('active');
+        this.menu.querySelector('.dropdown__menu__action.active')?.classList.remove('active');
         this.select.value = option.dataset.value!; // ! That would not change the value at all in event.
         this.control.textContent = option.textContent;
         option.classList.add('active');

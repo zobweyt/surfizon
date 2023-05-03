@@ -18,8 +18,8 @@ export class Dropdown {
     }
 
     protected render(): void {
-        this.control = this.element.querySelector('.dropdown-toggle')!;
-        this.menu = this.element.querySelector('.dropdown-menu')!;
+        this.control = this.element.querySelector('.dropdown__toggle')!;
+        this.menu = this.element.querySelector('.dropdown__menu')!;
 
         createPopper(this.control, this.menu, popperOptions);
     }

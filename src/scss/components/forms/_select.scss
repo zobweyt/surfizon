@@ -1,0 +1,27 @@
+@use "base/variables";
+@use "mixins/icons";
+
+.select {
+  .dropdown__toggle::after {
+    @include icons.icon;
+
+    content: "\eb1d";
+  }
+
+  .dropdown__menu {
+    .dropdown__menu__action {
+      &::after {
+        @include icons.icon;
+
+        content: "";
+        display: inline-block;
+        margin-left: auto;
+      }
+
+      &.active::after {
+        content: "\ea5e";
+        color: variables.$primary;
+      }
+    }
+  }
+}

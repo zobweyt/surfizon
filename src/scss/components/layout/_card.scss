@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "base/variables" as *;
+@use "mixins/motion";
 
 .card {
   border-radius: $border-radius-lg;
@@ -7,6 +8,7 @@
   box-shadow: $box-shadow;
   background-color: $white;
 
+  // ! Remake this.
   *:last-child, {
     margin-bottom: 0;
   }
@@ -15,16 +17,6 @@
 .card__title {
   font-weight: map.get($font-weights, bold);
   font-size: map.get($font-sizes, 3);
-}
-
-.card__image {
-  width: 100%;
-}
-
-// TODO: add card image link wrapper
-.card__image__link {
-  display: block;
-  line-height: 0;
 }
 
 .card__header,
