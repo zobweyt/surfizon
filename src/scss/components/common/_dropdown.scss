@@ -1,69 +1,66 @@
-@use "base/variables" as *;
-@use "mixins/borders" as *;
-@use "mixins/motion" as *;
+@use "sass:map";
+@use "base/variables";
+@use "mixins/borders";
+@use "mixins/motion";
 
 .dropdown {
-  --menu-padding: #{map-get($spacers, 1)};
-  --item-padding: #{map-get($spacers, 2)};
-  --background-alpha: #{map-get($percentages, 3)};
-
   position: relative;
   display: inline-block;
   width: 100%;
 
-  .dropdown-menu {
-    @include border;
-    @include transition(scale, opacity, box-shadow, transform);
+  .dropdown__menu {
+    @include borders.border;
+    @include motion.transition(scale, opacity, box-shadow, transform);
 
-    z-index: $zindex-dropdown;
-    border-radius: $border-radius;
-    padding: var(--menu-padding);
-    background: rgba($white, var(--background-alpha));
+    z-index: variables.$zindex-dropdown;
+    border-radius: variables.$border-radius;
+    padding: variables.$dropdown-menu-padding;
+    background-color: rgba(variables.$white, variables.$dropdown-menu-shade-percentage);
     opacity: 0;
     transform-origin: top left;
     pointer-events: none;
-    backdrop-filter: blur(10px);
-    scale: $component-active-scale;
+    backdrop-filter: blur(variables.$dropdown-menu-blur);
+    scale: variables.$component-active-scale;
 
-    .dropdown-item {
+    .dropdown__menu__item {
       display: flex;
       align-items: center;
-      border-radius: $border-radius;
-      padding: var(--item-padding);
-      gap: calc(var(--menu-padding) + var(--item-padding));
+      border-radius: variables.$border-radius;
+      padding: variables.$dropdown-menu-item-padding;
+      gap: variables.$dropdown-menu-item-gap;
 
       .icon {
-        color: $muted;
+        color: variables.$muted;
       }
     }
 
-    .dropdown-action {
-      @include transition(background, scale, opacity, outline);
+    .dropdown__menu__action {
+      @include motion.transition(background-color, scale, opacity, outline-width);
 
       color: inherit;
       user-select: none;
 
       &:hover,
       &:focus-visible {
-        background: rgba($light, var(--background-alpha));
+        background-color: rgba(variables.$light, variables.$dropdown-menu-shade-percentage);
       }
 
       &:active {
-        opacity: $link-active-opacity;
-        scale: $component-active-scale;
+        opacity: variables.$component-active-opacity;
+        scale: variables.$component-active-scale;
       }
 
       &.active {
-        font-weight: 500;
+        font-weight: map.get(variables.$font-weights, medium);
 
         .icon {
-          color: $black;
+          color: variables.$black;
         }
       }
     }
 
     &.show {
-      box-shadow: $box-shadow-lg;
+      box-shadow: variables.$box-shadow-lg;
       opacity: 1;
       pointer-events: auto;
       scale: 1;

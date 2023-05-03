@@ -1,0 +1,20 @@
+@use "sass:map";
+@use "base/variables";
+@use "mixins/motion";
+
+.link--image {
+  display: block;
+  line-height: 0;
+
+  img {
+    @include motion.transition(opacity);
+
+    &:hover {
+      opacity: map.get(variables.$percentages, 5);
+    }
+
+    &:active {
+      opacity: map.get(variables.$percentages, 4);
+    }
+  }
+}

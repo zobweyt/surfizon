@@ -72,6 +72,20 @@ $zindex-modal: 6 !default;
 $zindex-tooltip: 7 !default;
 $zindex-overlap: 8 !default;
 
+/// Percentages
+///
+/// Must be used to shade colors and control the state of most components.
+
+$contrast-percentage: 55% !default;
+
+$percentages: (
+  1: 10%,
+  2: 25%,
+  3: 50%,
+  4: 75%,
+  5: 95%,
+) !default;
+
 /// Color system
 ///
 /// Theming, organizing and categorizing colors.
@@ -89,47 +103,41 @@ $theme-colors: (
   primary: $primary,
 ) !default;
 
-// TODO: Guess how to replace this.
-$percentages: (
-  1: 25%,
-  2: 50%,
-  3: 75%,
-);
-
 /// Borders
 
-$border-width: 1px;
-$border-color: rgba($muted, map.get($percentages, 1));
+$border-width: 1px !default;
+$border-color: rgba($muted, map.get($percentages, 2)) !default;
 
-$border-radius: map.get($spacers, 2);
-$border-radius-sm: map.get($spacers, 1);
-$border-radius-lg: map.get($spacers, 3);
+$border-radius: map.get($spacers, 2) !default;
+$border-radius-sm: map.get($spacers, 1) !default;
+$border-radius-lg: map.get($spacers, 3) !default;
 
 /// Motion variables
 ///
 /// Includes everything that affects performance.
 
-$box-shadow: 0 2px 4px 0 rgba($dark, 2%), 0 1px 1px 0 rgba($dark, 4%);
-$box-shadow-lg: 0 2px 8px rgba($dark, 4%), 0 30px 70px rgba($dark, 8%);
+$box-shadow: 0 2px 4px 0 rgba($dark, 2%), 0 1px 1px 0 rgba($dark, 4%) !default;
+$box-shadow-lg: 0 2px 8px rgba($dark, 4%), 0 30px 70px rgba($dark, 8%) !default;
 
-$transition-duration: 150ms;
-$transition-timing-function: cubic-bezier(0.4, 0, 0, 1);
+$transition-duration: 150ms !default;
+$transition-timing-function: cubic-bezier(0.4, 0, 0, 1) !default;
 
 /// Components
+///
+/// Abstract variables for all the components.
 
-$component-active-scale: 0.96;
-$component-disabled-opacity: 0.75;
-
-/// Links
-
-$link-hover-lightness-scale-percentage: -40%;
-$link-hover-color: color.scale($primary, $lightness: $link-hover-lightness-scale-percentage);
-$link-active-opacity: 0.5;
+$component-active-scale: map.get($percentages, 5) !default;
+$component-active-opacity: map.get($percentages, 3) !default;
+$component-disabled-opacity: map.get($percentages, 4) !default;
 
 /// Icons
 
-$icon-size: $font-size-lg;
+$icon-size: $font-size-lg !default;
 
-/// Buttons
+/// Dropdown
 
-$button-hover-lightness-scale-percentage: -10%;
+$dropdown-menu-padding: map.get($spacers, 1) !default;
+$dropdown-menu-blur: 10px !default;
+$dropdown-menu-shade-percentage: map.get($percentages, 4) !default;
+$dropdown-menu-item-padding: map.get($spacers, 2) !default;
+$dropdown-menu-item-gap: calc($dropdown-menu-padding + $dropdown-menu-item-padding) !default;
