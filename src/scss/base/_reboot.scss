@@ -16,16 +16,21 @@
 body {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
   font-family: variables.$font-family-sans-serif;
   font-size: variables.$font-size-base;
   line-height: variables.$line-height-base;
   background-color: variables.$light;
+  padding-inline: map.get(variables.$spacers, 4);
 }
 
 main {
   flex: 1;
-  padding: map.get(variables.$spacers, 4);
+  width: 100%;
+  max-width: 1440px;
+  padding-block: map.get(variables.$spacers, 4);
 }
 
 p {
@@ -62,10 +67,19 @@ button {
   user-select: none;
 }
 
-input {
+input,
+textarea {
   border: none;
   font: inherit;
   user-select: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea {
+  resize: none;
 }
 
 @each $size, $value in variables.$font-sizes {
