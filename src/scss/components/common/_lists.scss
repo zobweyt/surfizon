@@ -1,0 +1,8 @@
+@use "sass:map";
+@use "base/variables";
+
+.form-control-list {
+  display: flex;
+  flex-direction: column;
+  gap: map.get(variables.$spacers, 2);
+}
