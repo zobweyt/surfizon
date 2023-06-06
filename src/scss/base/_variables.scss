@@ -119,7 +119,7 @@ $border-radius-lg: map.get($spacers, 3) !default;
 $box-shadow: 0 2px 4px 0 rgba($dark, 2%), 0 1px 1px 0 rgba($dark, 4%) !default;
 $box-shadow-lg: 0 2px 8px rgba($dark, 4%), 0 30px 70px rgba($dark, 8%) !default;
 
-$transition-duration: 200ms !default;
+$transition-duration: 150ms !default;
 $transition-timing-function: cubic-bezier(0.4, 0, 0, 1) !default;
 
 /// Components
