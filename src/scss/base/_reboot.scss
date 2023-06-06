@@ -33,6 +33,10 @@ main {
   padding-block: map.get(variables.$spacers, 4);
 }
 
+hr {
+  border: none;
+}
+
 p {
   margin-bottom: map.get(variables.$spacers, 3);
 }

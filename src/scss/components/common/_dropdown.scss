@@ -12,6 +12,7 @@
     @include borders.border;
     @include motion.transition(scale, opacity, box-shadow, transform);
 
+    position: absolute;
     z-index: variables.$zindex-dropdown;
     border-radius: variables.$border-radius;
     padding: variables.$dropdown-menu-padding;
@@ -32,6 +33,13 @@
       .icon {
         color: variables.$muted;
       }
+    }
+
+    .dropdown__menu__divider {
+      content: "";
+      border-bottom: variables.$border-width solid variables.$border-color;
+      margin-block: map.get(variables.$spacers, 1);
+      margin-inline: -#{variables.$dropdown-menu-padding};
     }
 
     .dropdown__menu__action {
