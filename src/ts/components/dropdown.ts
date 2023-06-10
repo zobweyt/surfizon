@@ -6,6 +6,8 @@ import {
 } from "@popperjs/core";
 import { BaseComponent } from "./base-component";
 
+// TODO: refactor show and hide, methods. rename close method and remake popperOptions getter
+
 const CLASS_NAME_SHOW = "show";
 
 const SELECTOR_CONTROL = ".dropdown__toggle";
@@ -31,21 +33,25 @@ export class Dropdown extends BaseComponent {
   }
 
   public show(): void {
-    this.menu.classList.add(CLASS_NAME_SHOW);
-    this.popper.update();
-
-    document.addEventListener("click", this.close.bind(this));
+    this.toggleMenu(true);
   }
 
   public hide(): void {
-    this.menu.classList.remove(CLASS_NAME_SHOW);
-    this.popper.update();
-
-    document.removeEventListener("click", this.close.bind(this));
+    this.toggleMenu(false);
   }
 
-  public toggle(event: MouseEvent): void {
+  public toggle(): void {
     this.isOpen ? this.hide() : this.show();
+  }
+
+  private toggleMenu(show: boolean): void {
+    this.menu.classList.toggle(CLASS_NAME_SHOW, show);
+    this.popper.update();
+    
+    (show ? document.addEventListener : document.removeEventListener)(
+      "click",
+      this.close.bind(this)
+    );
   }
 
   private close(event: MouseEvent): void {
