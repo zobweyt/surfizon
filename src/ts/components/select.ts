@@ -27,7 +27,7 @@ export class Select extends Dropdown {
     super(wrap(target, "select"));
   }
 
-  protected render(): void {
+  protected override render(): void {
     this.select = this.element.querySelector("select")!;
     this.select.style.display = "none";
     this.element.classList.add("dropdown");
@@ -36,7 +36,7 @@ export class Select extends Dropdown {
     super.render();
   }
 
-  protected initialize(): void {
+  protected override initialize(): void {
     super.initialize();
 
     this.menu.querySelectorAll(".dropdown__menu__action").forEach((option) => {
@@ -45,9 +45,7 @@ export class Select extends Dropdown {
   }
 
   private selectOption(option: HTMLElement) {
-    this.menu
-      .querySelector(".dropdown__menu__action.active")
-      ?.classList.remove("active");
+    this.menu.querySelector(".dropdown__menu__action.active")?.classList.remove("active");
     this.select.value = option.dataset.value!; // ! That would not change the value at all in event.
     this.control.textContent = option.textContent;
     option.classList.add("active");

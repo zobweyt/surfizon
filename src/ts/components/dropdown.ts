@@ -1,74 +1,76 @@
 import {
-  Options,
-  Instance,
   VariationPlacement,
+  Options as PopperOptions,
+  Instance as PopperInstance,
   createPopper,
 } from "@popperjs/core";
+
 import { BaseComponent } from "./base-component";
 
-// TODO: refactor show and hide, methods. rename close method and remake popperOptions getter
-
 const CLASS_NAME_SHOW = "show";
+const CLASS_NAME_OVERLAY = "overlay";
 
-const SELECTOR_CONTROL = ".dropdown__toggle";
+// TODO: move to `../constants.ts`.
+const SELECTOR_ENABLED = ":not(.disabled):enabled";
+
+const SELECTOR_CONTROL = `.dropdown__toggle${SELECTOR_ENABLED}`;
 const SELECTOR_MENU = ".dropdown__menu";
+
+// TODO: add destroy or desponse function.
 
 export class Dropdown extends BaseComponent {
   protected control!: HTMLElement;
   protected menu!: HTMLElement;
-  protected popper!: Instance;
+  protected popperInstance!: PopperInstance;
 
-  public get isOpen(): boolean {
-    return this.menu.classList.contains(CLASS_NAME_SHOW);
-  }
-
-  protected render(): void {
+  protected override render(): void {
     this.control = this.element.querySelector(SELECTOR_CONTROL)!;
     this.menu = this.element.querySelector(SELECTOR_MENU)!;
-    this.popper = createPopper(this.control, this.menu, this.popperOptions);
+    this.popperInstance = createPopper(this.control, this.menu, this.popperOptions);
   }
 
-  protected initialize(): void {
+  protected override initialize(): void {
     this.control.onclick = this.toggle.bind(this);
   }
 
+  public get isShown(): boolean {
+    return this.menu.classList.contains(CLASS_NAME_SHOW);
+  }
+
   public show(): void {
-    this.toggleMenu(true);
+    this.toggleMenuVisibility(true);
   }
 
   public hide(): void {
-    this.toggleMenu(false);
+    this.toggleMenuVisibility(false);
   }
 
   public toggle(): void {
-    this.isOpen ? this.hide() : this.show();
+    this.isShown ? this.hide() : this.show();
   }
 
-  private toggleMenu(show: boolean): void {
+  private toggleMenuVisibility(show: boolean): void {
     this.menu.classList.toggle(CLASS_NAME_SHOW, show);
-    this.popper.update();
-    
-    (show ? document.addEventListener : document.removeEventListener)(
-      "click",
-      this.close.bind(this)
-    );
+    document.body.classList.toggle(CLASS_NAME_OVERLAY, show);
+
+    // TODO: rename `func` variable.
+    const func = show ? document.addEventListener : document.removeEventListener;
+    func("click", this.handleOutsideDropdownInteraction);
+
+    this.popperInstance.update();
   }
 
-  private close(event: MouseEvent): void {
-    const clickedNode = event.target as Node;
-    const isNodeInMenu = this.menu.contains(clickedNode);
-    const isNodeInControl = this.control.contains(clickedNode);
-    const clickedOutsideDropdown = !isNodeInMenu && !isNodeInControl;
+  private handleOutsideDropdownInteraction = (event: MouseEvent): void => {
+    const node = event.target as Node;
+    const isNodeWithinDropdown = this.menu.contains(node) || this.control.contains(node);
 
-    if (clickedOutsideDropdown) {
-      this.hide();
-    }
-  }
+    isNodeWithinDropdown || this.hide();
+  };
 
-  private get popperOptions(): Options {
-    const placement = this.element.dataset?.placement as VariationPlacement;
+  private get popperOptions(): PopperOptions {
+    const placement = this.element.dataset.placement as VariationPlacement;
 
-    const popperOptions: Options = {
+    return {
       placement: placement ?? "bottom-start",
       strategy: "absolute",
       modifiers: [
@@ -81,7 +83,7 @@ export class Dropdown extends BaseComponent {
         {
           name: "offset",
           options: {
-            offset: [0, 5],
+            offset: [0, 4],
           },
         },
         {
@@ -92,7 +94,5 @@ export class Dropdown extends BaseComponent {
         },
       ],
     };
-
-    return popperOptions;
   }
 }
