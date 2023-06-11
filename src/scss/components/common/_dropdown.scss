@@ -3,6 +3,8 @@
 @use "mixins/borders";
 @use "mixins/motion";
 
+$w: 600px;
+
 .dropdown {
   position: relative;
 
@@ -68,8 +70,47 @@
     &.show {
       box-shadow: variables.$box-shadow-lg;
       opacity: 1;
+      transition-duration: 250ms;
       pointer-events: auto;
       scale: 1;
+    }
+  }
+}
+
+@media screen and (width <= #{$w}) {
+  .dropdown__menu {
+    position: fixed !important;
+    overflow-y: scroll;
+    width: 100%;
+    min-height: 20rem;
+
+    // transform-origin: top;
+    inset: auto 0 0 !important;
+
+    &.show {
+      transform: none !important;
+    }
+  }
+
+  body::before {
+    @include motion.transition(background-color, opacity, backdrop-filter);
+
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: rgb(0 0 0 / 25%);
+    opacity: 0;
+    backdrop-filter: blur(10px);
+    inset: 0;
+  }
+
+  body.overlay {
+    transition-duration: 250ms;
+    pointer-events: none;
+
+    &::before {
+      z-index: 1;
+      opacity: 1;
     }
   }
 }
