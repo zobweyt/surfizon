@@ -24,6 +24,30 @@ body {
   line-height: variables.$line-height-base;
   background-color: variables.$light;
   padding-inline: map.get(variables.$spacers, 4);
+
+  @media screen and (width <= #{map.get(variables.$grid-breakpoints, md)}) {
+    &::before {
+      @include motion.transition(opacity, backdrop-filter);
+
+      content: "";
+      position: fixed;
+      opacity: 0;
+      transition-duration: 500ms;
+      inset: 0;
+    }
+
+    &.overlay {
+      overflow: hidden;
+      pointer-events: none;
+
+      &::before {
+        @include motion.glassmorphism(variables.$dark);
+
+        z-index: 1;
+        opacity: 1;
+      }
+    }
+  }
 }
 
 main {

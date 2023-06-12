@@ -1,5 +1,6 @@
 import {
   VariationPlacement,
+  PositioningStrategy,
   Options as PopperOptions,
   Instance as PopperInstance,
   createPopper,
@@ -30,6 +31,8 @@ export class Dropdown extends BaseComponent {
   }
 
   protected override initialize(): void {
+    // ! Maybe use here addEventListener? you have to implement destroying as well.
+
     this.control.onclick = this.toggle.bind(this);
   }
 
@@ -53,9 +56,9 @@ export class Dropdown extends BaseComponent {
     this.menu.classList.toggle(CLASS_NAME_SHOW, show);
     document.body.classList.toggle(CLASS_NAME_OVERLAY, show);
 
-    // TODO: rename `func` variable.
-    const func = show ? document.addEventListener : document.removeEventListener;
-    func("click", this.handleOutsideDropdownInteraction);
+    const adjustEventListener = show ? document.addEventListener : document.removeEventListener;
+    adjustEventListener("click", this.handleOutsideDropdownInteraction);
+    adjustEventListener("keydown", this.handleKeydownAccessibility);
 
     this.popperInstance.update();
   }
@@ -67,11 +70,18 @@ export class Dropdown extends BaseComponent {
     isNodeWithinDropdown || this.hide();
   };
 
-  private get popperOptions(): PopperOptions {
-    const placement = this.element.dataset.placement as VariationPlacement;
+  private handleKeydownAccessibility = (event: KeyboardEvent): void => {
+    event.key === "Escape" && this.hide();
+  };
 
+  private get placement(): VariationPlacement {
+    const { placement } = this.element.dataset;
+    return (placement as VariationPlacement) || "bottom-start";
+  }
+
+  private get popperOptions(): PopperOptions {
     return {
-      placement: placement ?? "bottom-start",
+      placement: this.placement,
       strategy: "absolute",
       modifiers: [
         {
@@ -84,12 +94,6 @@ export class Dropdown extends BaseComponent {
           name: "offset",
           options: {
             offset: [0, 4],
-          },
-        },
-        {
-          name: "flip",
-          options: {
-            allowedAutoPlacements: ["top"],
           },
         },
       ],
