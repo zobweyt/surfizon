@@ -119,8 +119,28 @@ $border-radius-lg: map.get($spacers, 3) !default;
 $box-shadow: 0 2px 4px 0 rgba($dark, 2%), 0 1px 1px 0 rgba($dark, 4%) !default;
 $box-shadow-lg: 0 2px 8px rgba($dark, 4%), 0 30px 70px rgba($dark, 8%) !default;
 
-$transition-duration: 150ms !default;
+$transition-duration-fast: 150ms !default;
+$transition-duration-medium: 250ms !default;
+$transition-duration-slow: 500ms !default;
 $transition-timing-function: cubic-bezier(0.4, 0, 0, 1) !default;
+
+$glassmorphism-shade-percentage: 75% !default;
+$glassmorphism-blur: 10px !default;
+$glassmorphism-saturate: 180% !default;
+
+/// Grid breakpoints
+///
+/// Define the minimum dimensions at which your layout will change,
+/// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
 
 /// Components
 ///
@@ -137,7 +157,5 @@ $icon-size: $font-size-lg !default;
 /// Dropdown
 
 $dropdown-menu-padding: map.get($spacers, 1) !default;
-$dropdown-menu-blur: 10px !default;
-$dropdown-menu-shade-percentage: map.get($percentages, 4) !default;
 $dropdown-menu-item-padding: map.get($spacers, 2) !default;
 $dropdown-menu-item-gap: calc($dropdown-menu-padding + $dropdown-menu-item-padding) !default;

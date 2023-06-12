@@ -2,6 +2,11 @@
 
 @mixin transition($properties...) {
   transition-property: $properties;
-  transition-duration: variables.$transition-duration;
+  transition-duration: variables.$transition-duration-fast;
   transition-timing-function: variables.$transition-timing-function;
+}
+
+@mixin glassmorphism($color) {
+  background: rgba($color, variables.$glassmorphism-shade-percentage);
+  backdrop-filter: blur(variables.$glassmorphism-blur) saturate(variables.$glassmorphism-saturate);
 }

@@ -3,24 +3,29 @@
 @use "mixins/borders";
 @use "mixins/motion";
 
-$w: 600px;
-
 .dropdown {
   position: relative;
 
+  .dropdown__menu--top-left {
+    transform-origin: top left;
+  }
+
+  .dropdown__menu--top-right {
+    transform-origin: top right;
+  }
+
   .dropdown__menu {
     @include borders.border;
+    @include motion.glassmorphism(variables.$white);
     @include motion.transition(scale, opacity, box-shadow, transform);
 
     position: absolute;
     z-index: variables.$zindex-dropdown;
     border-radius: variables.$border-radius;
     padding: variables.$dropdown-menu-padding;
-    background-color: rgba(variables.$white, variables.$dropdown-menu-shade-percentage);
     opacity: 0;
     transform-origin: top left;
     pointer-events: none;
-    backdrop-filter: blur(variables.$dropdown-menu-blur);
     scale: variables.$component-active-scale;
 
     .dropdown__menu__item {
@@ -48,9 +53,8 @@ $w: 600px;
       color: inherit;
       user-select: none;
 
-      &:hover,
-      &:focus-visible {
-        background-color: rgba(variables.$light, variables.$dropdown-menu-shade-percentage);
+      &:hover {
+        background-color: rgba(variables.$light, variables.$glassmorphism-shade-percentage);
       }
 
       &:active {
@@ -74,43 +78,24 @@ $w: 600px;
       pointer-events: auto;
       scale: 1;
     }
-  }
-}
 
-@media screen and (width <= #{$w}) {
-  .dropdown__menu {
-    position: fixed !important;
-    overflow-y: scroll;
-    width: 100%;
-    min-height: 20rem;
+    @media screen and (width <= #{map.get(variables.$grid-breakpoints, md)}) {
+      $margin: map.get(variables.$spacers, 2);
 
-    // transform-origin: top;
-    inset: auto 0 0 !important;
+      position: fixed !important;
+      overflow-y: scroll;
+      width: auto;
+      max-height: 75vh;
+      transform: translateY(calc(100% + $margin)) !important;
+      transform-origin: bottom;
+      transition-duration: 500ms;
+      inset: auto $margin $margin !important;
+      scale: 1;
 
-    &.show {
-      transform: none !important;
-    }
-  }
-
-  body::before {
-    @include motion.transition(background-color, opacity, backdrop-filter);
-
-    content: "";
-    position: absolute;
-    z-index: -1;
-    background: rgb(0 0 0 / 25%);
-    opacity: 0;
-    backdrop-filter: blur(10px);
-    inset: 0;
-  }
-
-  body.overlay {
-    transition-duration: 250ms;
-    pointer-events: none;
-
-    &::before {
-      z-index: 1;
-      opacity: 1;
+      &.show {
+        transform: none !important;
+        transition-duration: 500ms;
+      }
     }
   }
 }

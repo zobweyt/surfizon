@@ -560,12 +560,7 @@
         ]
       }
     ],
-    "declaration-no-important": [
-      true,
-      {
-        "severity": "warning"
-      }
-    ],
+    "declaration-no-important": null,
     "font-family-name-quotes": "always-unless-keyword",
     "font-family-no-duplicate-names": true,
     "font-weight-notation": "numeric",
