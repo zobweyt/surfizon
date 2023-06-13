@@ -5,26 +5,19 @@
 
 .dropdown {
   position: relative;
-
-  .dropdown__menu--top-left {
-    transform-origin: top left;
-  }
-
-  .dropdown__menu--top-right {
-    transform-origin: top right;
-  }
+  width: fit-content;
 
   .dropdown__menu {
     @include borders.border;
     @include motion.glassmorphism(variables.$white);
-    @include motion.transition(scale, opacity, box-shadow, transform);
+    @include motion.transition(sm, scale, opacity, box-shadow, transform);
 
-    position: absolute;
     z-index: variables.$zindex-dropdown;
     border-radius: variables.$border-radius;
-    padding: variables.$dropdown-menu-padding;
+    padding: variables.$dropdown-menu-padding 0;
+    width: max-content;
     opacity: 0;
-    transform-origin: top left;
+    transform-origin: top;
     pointer-events: none;
     scale: variables.$component-active-scale;
 
@@ -34,21 +27,15 @@
       border-radius: variables.$border-radius;
       padding: variables.$dropdown-menu-item-padding;
       gap: variables.$dropdown-menu-item-gap;
+      margin-inline: variables.$dropdown-menu-padding;
 
       .icon {
         color: variables.$muted;
       }
     }
 
-    .dropdown__menu__divider {
-      content: "";
-      border-bottom: variables.$border-width solid variables.$border-color;
-      margin-block: map.get(variables.$spacers, 1);
-      margin-inline: -#{variables.$dropdown-menu-padding};
-    }
-
     .dropdown__menu__action {
-      @include motion.transition(background-color, scale, opacity, outline-width);
+      @include motion.transition(sm, background-color, scale, opacity, outline-width);
 
       color: inherit;
       user-select: none;
@@ -74,15 +61,15 @@
     &.show {
       box-shadow: variables.$box-shadow-lg;
       opacity: 1;
-      transition-duration: 250ms;
+      transition-duration: map.get(variables.$durations, md);
       pointer-events: auto;
       scale: 1;
     }
 
-    @media screen and (width <= #{map.get(variables.$grid-breakpoints, md)}) {
+    @media screen and (width <= map.get(variables.$grid-breakpoints, md)) {
       $margin: map.get(variables.$spacers, 2);
 
-      position: fixed !important;
+      position: fixed !important; // TODO: use absolute here
       overflow-y: scroll;
       width: auto;
       max-height: 75vh;

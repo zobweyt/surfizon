@@ -7,7 +7,7 @@
   line-height: 0;
 
   img {
-    @include motion.transition(opacity);
+    @include motion.transition(sm, opacity);
 
     &:hover {
       opacity: map.get(variables.$percentages, 5);

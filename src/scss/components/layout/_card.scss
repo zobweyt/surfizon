@@ -1,12 +1,12 @@
 @use "sass:map";
-@use "base/variables" as *;
+@use "base/variables";
 @use "mixins/motion";
 
 .card {
-  border-radius: $border-radius-lg;
+  border-radius: variables.$border-radius-lg;
   width: 100%;
-  box-shadow: $box-shadow;
-  background-color: $white;
+  box-shadow: variables.$box-shadow;
+  background-color: variables.$white;
 
   // ! Remake this.
   *:last-child, {
@@ -15,12 +15,12 @@
 }
 
 .card__title {
-  font-weight: map.get($font-weights, bold);
-  font-size: map.get($font-sizes, 3);
+  font-weight: map.get(variables.$font-weights, bold);
+  font-size: map.get(variables.$font-sizes, 3);
 }
 
 .card__header,
 .card__body,
 .card__footer {
-  padding: map.get($spacers, 3) map.get($spacers, 4);
+  padding: map.get(variables.$spacers, 3) map.get(variables.$spacers, 4);
 }

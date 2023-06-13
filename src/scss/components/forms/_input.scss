@@ -1,8 +1,8 @@
 @use "base/variables" as *;
-@use "mixins/motion" as *;
+@use "mixins/motion";
 
 .form-control {
-  @include transition(color, background-color, box-shadow);
+  @include motion.transition(sm, color, background-color, box-shadow);
 
   display: flex;
   border-radius: $border-radius;
@@ -26,7 +26,11 @@
     background-color: $white;
   }
 
-  &:hover:not(&:focus) {
+  &:hover:not(:focus) {
     box-shadow: inset 0 0 0 1px rgba($muted, 25%);
+  }
+
+  &:hover:not(:focus, :placeholder-shown) {
+    box-shadow: inset 0 0 0 1px rgba($muted, 50%);
   }
 }

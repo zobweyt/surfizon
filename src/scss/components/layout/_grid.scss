@@ -1,0 +1,14 @@
+@use "sass:map";
+@use "base/variables";
+
+.row {
+  display: grid;
+  grid-gap: variables.$grid-gutter;
+  grid-template-columns: repeat(variables.$grid-columns, 1fr);
+}
+
+@for $i from 1 through variables.$grid-columns {
+  .col-#{$i} {
+    grid-column: span #{$i};
+  }
+}

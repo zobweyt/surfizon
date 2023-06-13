@@ -2,7 +2,9 @@
 @use "base/variables";
 @use "mixins/motion";
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,26 +15,28 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  margin: 0 auto;
   min-height: 100vh;
+  max-width: 1200px;
   font-family: variables.$font-family-sans-serif;
   font-size: variables.$font-size-base;
   line-height: variables.$line-height-base;
-  background-color: variables.$light;
-  padding-inline: map.get(variables.$spacers, 4);
+  background: variables.$light;
+  padding-inline: 15px;
 
   @media screen and (width <= #{map.get(variables.$grid-breakpoints, md)}) {
     &::before {
-      @include motion.transition(opacity, backdrop-filter);
+      @include motion.transition(lg, opacity, backdrop-filter);
 
       content: "";
       position: fixed;
+      z-index: -1;
       opacity: 0;
-      transition-duration: 500ms;
       inset: 0;
     }
 
@@ -59,14 +63,39 @@ main {
 
 hr {
   border: none;
+  border-top: variables.$border-width solid variables.$border-color;
+  margin-block: map.get(variables.$spacers, 1);
+}
+
+@each $size, $value in variables.$font-sizes {
+  h#{$size} {
+    margin-bottom: map.get(variables.$spacers, 2);
+    font-size: $value;
+  }
 }
 
 p {
   margin-bottom: map.get(variables.$spacers, 3);
 }
 
+small {
+  font-size: variables.$font-size-sm;
+  color: variables.$muted;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+  text-decoration-skip-ink: none;
+}
+
+address {
+  margin-bottom: map.get(variables.$spacers, 3);
+  font: inherit;
+}
+
 a {
-  @include motion.transition(color, opacity, outline-width);
+  @include motion.transition(sm, color, opacity, outline-width);
 
   border-radius: variables.$border-radius-sm;
   text-decoration: none;
@@ -108,11 +137,4 @@ textarea {
 
 textarea {
   resize: none;
-}
-
-@each $size, $value in variables.$font-sizes {
-  h#{$size} {
-    margin-bottom: map.get(variables.$spacers, 2);
-    font-size: $value;
-  }
 }

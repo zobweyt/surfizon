@@ -1,0 +1,16 @@
+@use "sass:map";
+@use "base/variables";
+@use "mixins/borders";
+
+.avatar {
+  @include borders.border;
+
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+}
+
+.avatar-lg {
+  width: 48px;
+  height: 48px;
+}

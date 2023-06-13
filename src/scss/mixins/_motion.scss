@@ -1,9 +1,10 @@
+@use "sass:map";
 @use "base/variables";
 
-@mixin transition($properties...) {
+@mixin transition($duration-key: sm, $properties...) {
   transition-property: $properties;
-  transition-duration: variables.$transition-duration-fast;
-  transition-timing-function: variables.$transition-timing-function;
+  transition-duration: map.get(variables.$durations, $duration-key);
+  transition-timing-function: variables.$timing-function;
 }
 
 @mixin glassmorphism($color) {
