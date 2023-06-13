@@ -1,0 +1,32 @@
+@use "sass:map";
+@use "base/variables";
+@use "mixins/motion";
+
+.navbar {
+  align-items: center;
+  padding: map.get(variables.$spacers, 2) 0;
+
+  &__logo {
+    @include motion.transition(xs, opacity);
+
+    display: inline-block;
+
+    img {
+      height: 2rem;
+    }
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+
+  .col-3:last-child {
+    display: flex;
+    justify-content: end;
+    gap: map.get(variables.$spacers, 2);
+  }
+}
