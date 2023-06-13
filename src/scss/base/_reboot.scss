@@ -1,6 +1,7 @@
 @use "sass:map";
 @use "base/variables";
 @use "mixins/motion";
+@use "mixins/borders";
 
 *,
 *::before,
@@ -8,11 +9,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  &:focus-visible {
-    outline: 2px solid rgba(variables.$primary, map.get(variables.$percentages, 4));
-    outline-offset: 1px;
-  }
 }
 
 html {
@@ -75,12 +71,7 @@ hr {
 }
 
 p {
-  margin-bottom: map.get(variables.$spacers, 3);
-}
-
-small {
-  font-size: variables.$font-size-sm;
-  color: variables.$muted;
+  margin-bottom: variables.$paragraph-margin-bottom;
 }
 
 abbr[title] {
@@ -90,31 +81,182 @@ abbr[title] {
 }
 
 address {
-  margin-bottom: map.get(variables.$spacers, 3);
+  margin-bottom: variables.$paragraph-margin-bottom;
   font: inherit;
 }
 
+// Lists
+
+ol,
+ul {
+  padding-left: 1rem;
+}
+
+ol,
+ul,
+dl {
+  margin-bottom: variables.$paragraph-margin-bottom;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+dt {
+  font-weight: map.get(variables.$font-weights, bold);
+}
+
+dd {
+  margin-bottom: calc(variables.$paragraph-margin-bottom / 2);
+}
+
+blockquote {
+  margin: 0 0 1rem;
+}
+
+b,
+strong {
+  font-weight: map.get(variables.$font-weights, bold);
+}
+
+small {
+  font-size: variables.$font-size-sm;
+  color: variables.$muted;
+}
+
+mark {
+  border-radius: variables.$border-radius-sm;
+  background: rgba(variables.$yellow, 25%);
+}
+
+/// Sub and Sup
+///
+/// Prevent `sub` and `sup` elements from affecting the line height in
+/// all browsers.
+
+sub,
+sup {
+  position: relative;
+  vertical-align: baseline;
+  font-size: variables.$font-size-sm;
+  line-height: 0;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
 a {
-  @include motion.transition(sm, color, opacity, outline-width);
+  @include motion.transition(xs, color, opacity, outline-width);
 
   border-radius: variables.$border-radius-sm;
   text-decoration: none;
   color: variables.$primary;
-  opacity: 1;
 
-  &:hover,
-  &:focus-visible {
-    color: rgba(variables.$primary, map.get(variables.$percentages, 4));
+  &:hover {
+    color: variables.$black;
   }
 
   &:active {
-    color: rgba(variables.$primary, map.get(variables.$percentages, 3));
+    opacity: 0.5;
   }
 }
 
-img {
+pre,
+code,
+kbd,
+samp,
+var {
+  font-family: variables.$font-family-monospace;
+}
+
+pre {
+  display: block;
+  overflow: auto; // 3
+  margin-top: 0; // 1
+  margin-bottom: 1rem; // 2
+
+  // Account for some code outputs that place code tags in pre tags
+  code {
+    word-break: normal;
+    color: inherit;
+  }
+}
+
+code {
+  word-wrap: break-word;
+
+  // Streamline the style when inside anchors to avoid broken underline and more
+  a > & {
+    color: inherit;
+  }
+}
+
+kbd {
+  @include borders.border(variables.$border-radius-sm);
+
+  padding: map.get(variables.$spacers, 1);
+  background: variables.$light;
+
+  kbd {
+    padding: 0;
+    font-weight: map.get(variables.$font-weights, bold);
+  }
+}
+
+figure {
+  margin: 0 0 variables.$paragraph-margin-bottom;
+}
+
+img,
+svg {
+  vertical-align: middle;
   width: 100%;
 }
+
+// // Tables
+// //
+// // Prevent double borders
+
+// table {
+//   caption-side: bottom;
+//   border-collapse: collapse;
+// }
+
+// caption {
+//   padding-top: $table-cell-padding-y;
+//   padding-bottom: $table-cell-padding-y;
+//   color: $table-caption-color;
+//   text-align: left;
+// }
+
+// // 1. Removes font-weight bold by inheriting
+// // 2. Matches default `<td>` alignment by inheriting `text-align`.
+// // 3. Fix alignment for Safari
+
+// th {
+//   font-weight: $table-th-font-weight; // 1
+//   text-align: inherit; // 2
+//   text-align: -webkit-match-parent; // 3
+// }
+
+// thead,
+// tbody,
+// tfoot,
+// tr,
+// td,
+// th {
+//   border-color: inherit;
+//   border-style: solid;
+//   border-width: 0;
+// }
 
 button {
   border: none;
@@ -137,4 +279,8 @@ textarea {
 
 textarea {
   resize: none;
+}
+
+[hidden] {
+  display: none !important;
 }

@@ -7,11 +7,12 @@
   position: relative;
   width: fit-content;
 
-  .dropdown__menu {
+  &__menu {
     @include borders.border;
     @include motion.glassmorphism(variables.$white);
     @include motion.transition(sm, scale, opacity, box-shadow, transform);
 
+    position: absolute;
     z-index: variables.$zindex-dropdown;
     border-radius: variables.$border-radius;
     padding: variables.$dropdown-menu-padding 0;
@@ -21,7 +22,7 @@
     pointer-events: none;
     scale: variables.$component-active-scale;
 
-    .dropdown__menu__item {
+    &__item {
       display: flex;
       align-items: center;
       border-radius: variables.$border-radius;
@@ -34,7 +35,7 @@
       }
     }
 
-    .dropdown__menu__action {
+    &__action {
       @include motion.transition(sm, background-color, scale, opacity, outline-width);
 
       color: inherit;

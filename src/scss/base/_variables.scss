@@ -56,10 +56,28 @@ $spacers: (
   5: $spacer * 3,
 ) !default;
 
+/// Paragraphs
+
+$paragraph-margin-bottom: 1rem !default;
+
 /// Grids
 
 $grid-columns: 12;
 $grid-gutter: 30px;
+
+/// Grid breakpoints
+///
+/// Define the minimum dimensions at which your layout will change,
+/// adapting to different screen sizes, for use in media queries.
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
 
 /// Z-index master list
 ///
@@ -98,7 +116,14 @@ $percentages: (
 $light: #f0f2f5 !default;
 $dark: #202333 !default;
 $muted: #909199 !default;
-$primary: #067aff !default;
+$primary: #067aff !default; // TODO: rename to blue in future.
+$red: #ef4444 !default;
+$yellow: #eab308 !default;
+$lime: #84cc16 !default;
+$green: #22c55e !default;
+$purple: #a855f7 !default;
+$pink: #ec4899 !default;
+$sky: #0ea5e9 !default;
 $white: #fff !default;
 $black: #000 !default;
 
@@ -137,20 +162,6 @@ $timing-function: cubic-bezier(0.4, 0, 0, 1) !default;
 $glassmorphism-shade-percentage: 75% !default;
 $glassmorphism-blur: 10px !default;
 $glassmorphism-saturate: 180% !default;
-
-/// Grid breakpoints
-///
-/// Define the minimum dimensions at which your layout will change,
-/// adapting to different screen sizes, for use in media queries.
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-) !default;
 
 /// Components
 ///
