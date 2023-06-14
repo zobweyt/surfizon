@@ -22,5 +22,5 @@
 .card__header,
 .card__body,
 .card__footer {
-  padding: map.get(variables.$spacers, 3) map.get(variables.$spacers, 4);
+  padding: map.get(variables.$spacers, 4) map.get(variables.$spacers, 4);
 }

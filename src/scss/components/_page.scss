@@ -1,0 +1,17 @@
+@use "sass:map";
+@use "base/variables";
+@use "layout/grid";
+
+.page {
+  @extend .row;
+
+  padding-block: map.get(variables.$spacers, 4);
+
+  main {
+    grid-column: span 6;
+  }
+
+  aside {
+    grid-column: span 3;
+  }
+}

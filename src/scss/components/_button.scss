@@ -5,13 +5,13 @@
 
 .btn {
   @include buttons.button-variant(variables.$white, variables.$muted);
-  @include motion.transition(sm, box-shadow, background-color, scale, outline-width);
+  @include motion.transition(xs, box-shadow, background-color, scale, outline-width);
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: variables.$border-radius;
-  padding: map.get(variables.$spacers, 2) map.get(variables.$spacers, 3);
+  padding: map.get(variables.$spacers, 2) map.get(variables.$spacers, 4);
   font-weight: map.get(variables.$font-weights, medium);
   line-height: variables.$line-height-lg;
   gap: map.get(variables.$spacers, 1);

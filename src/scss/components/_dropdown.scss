@@ -12,6 +12,25 @@
     @include motion.glassmorphism(variables.$white);
     @include motion.transition(sm, scale, opacity, box-shadow, transform);
 
+    @media screen and (width <= map.get(variables.$grid-breakpoints, md)) {
+      $margin: map.get(variables.$spacers, 2);
+
+      position: fixed !important; // TODO: use absolute here
+      overflow-y: scroll;
+      width: auto;
+      max-height: 75vh;
+      transform: translateY(calc(100% + $margin)) !important;
+      transform-origin: bottom;
+      transition-duration: 500ms;
+      inset: auto $margin $margin !important;
+      scale: 1;
+
+      &.show {
+        transform: none !important;
+        transition-duration: 500ms;
+      }
+    }
+
     position: absolute;
     z-index: variables.$zindex-dropdown;
     border-radius: variables.$border-radius;
@@ -36,7 +55,7 @@
     }
 
     &__action {
-      @include motion.transition(sm, background-color, scale, opacity, outline-width);
+      @include motion.transition(xs, background-color, scale, opacity, outline-width);
 
       color: inherit;
       user-select: none;
@@ -65,25 +84,6 @@
       transition-duration: map.get(variables.$durations, md);
       pointer-events: auto;
       scale: 1;
-    }
-
-    @media screen and (width <= map.get(variables.$grid-breakpoints, md)) {
-      $margin: map.get(variables.$spacers, 2);
-
-      position: fixed !important; // TODO: use absolute here
-      overflow-y: scroll;
-      width: auto;
-      max-height: 75vh;
-      transform: translateY(calc(100% + $margin)) !important;
-      transform-origin: bottom;
-      transition-duration: 500ms;
-      inset: auto $margin $margin !important;
-      scale: 1;
-
-      &.show {
-        transform: none !important;
-        transition-duration: 500ms;
-      }
     }
   }
 }

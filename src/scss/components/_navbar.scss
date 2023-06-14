@@ -1,18 +1,21 @@
 @use "sass:map";
 @use "base/variables";
 @use "mixins/motion";
+@use "layout/grid";
 
 .navbar {
+  @extend .row;
+
   align-items: center;
   padding: map.get(variables.$spacers, 2) 0;
 
   &__logo {
     @include motion.transition(xs, opacity);
 
-    display: inline-block;
+    justify-self: start;
 
     img {
-      height: 2rem;
+      height: variables.$navbar-logo-height;
     }
 
     &:hover {
@@ -24,9 +27,18 @@
     }
   }
 
-  .col-3:last-child {
-    display: flex;
-    justify-content: end;
+  &__nav {
+    justify-self: end;
     gap: map.get(variables.$spacers, 2);
+  }
+
+  &__searchbar {
+    grid-column: span 6;
+  }
+
+  &__logo,
+  &__nav {
+    display: inline-flex;
+    grid-column: span 3;
   }
 }
