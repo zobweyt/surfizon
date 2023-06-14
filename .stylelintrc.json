@@ -12,6 +12,7 @@
         "name": "include",
         "hasBlock": false
       },
+      "at-rules",
       "declarations",
       {
         "type": "rule",
@@ -78,8 +79,7 @@
         "type": "at-rule",
         "name": "include",
         "hasBlock": true
-      },
-      "at-rules"
+      }
     ],
     "order/properties-alphabetical-order": null,
     "order/properties-order": [

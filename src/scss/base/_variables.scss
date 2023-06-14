@@ -51,9 +51,11 @@ $spacers: (
   0: 0,
   1: $spacer * 0.25,
   2: $spacer * 0.5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
+  3: $spacer * 0.75,
+  4: $spacer,
+  5: $spacer * 1.5,
+  6: $spacer * 1.75,
+  7: $spacer * 3,
 ) !default;
 
 /// Paragraphs
@@ -113,7 +115,8 @@ $percentages: (
 ///
 /// Theming, organizing and categorizing colors.
 
-$light: #f0f2f5 !default;
+$body-bg: #f0f2f5 !default;
+$light: #e5e7eb !default;
 $dark: #202333 !default;
 $muted: #909199 !default;
 $primary: #067aff !default; // TODO: rename to blue in future.
@@ -129,7 +132,6 @@ $black: #000 !default;
 
 $theme-colors: (
   dark: $dark,
-  light: $light,
   primary: $primary,
 ) !default;
 
@@ -170,6 +172,11 @@ $glassmorphism-saturate: 180% !default;
 $component-active-scale: map.get($percentages, 5) !default;
 $component-active-opacity: map.get($percentages, 3) !default;
 $component-disabled-opacity: map.get($percentages, 4) !default;
+
+/// Navbar
+
+$navbar-spacer: map.get($spacers, 2) !default;
+$navbar-logo-height: 2rem;
 
 /// Icons
 

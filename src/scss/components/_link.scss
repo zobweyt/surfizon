@@ -18,3 +18,47 @@
     }
   }
 }
+
+.link--section {
+  @include motion.transition(xs, background-color, opacity);
+
+  display: flex;
+  align-items: center;
+  border-radius: variables.$border-radius-lg;
+  padding: map.get(variables.$spacers, 3);
+  font-weight: map.get(variables.$font-weights, medium);
+  color: variables.$black;
+  user-select: none;
+  gap: map.get(variables.$spacers, 3);
+
+  &:hover {
+    background: variables.$light;
+  }
+
+  &.active {
+    box-shadow: variables.$box-shadow;
+    background: variables.$white;
+
+    .icon {
+      color: variables.$primary;
+    }
+  }
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: variables.$border-radius-lg;
+  padding: map.get(variables.$spacers, 1) map.get(variables.$spacers, 2);
+  font-size: variables.$font-size-sm;
+  line-height: 1;
+  color: variables.$white;
+  background: variables.$red;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: map.get(variables.$spacers, 1);
+}

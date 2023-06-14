@@ -8,11 +8,11 @@
 
   display: flex;
   border-radius: $border-radius;
-  padding: map-get($spacers, 2) map-get($spacers, 3);
+  padding: map-get($spacers, 2) map-get($spacers, 4);
   width: 100%;
   line-height: $line-height-lg;
   color: $dark;
-  background-color: #e5e7eb;
+  background-color: $light;
 
   &::placeholder {
     color: $muted;
@@ -39,7 +39,7 @@
 
 input[type="search"] {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' stroke-width='2' stroke='%23909199' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0' /%3E%3Cpath d='M21 21l-6 -6' /%3E%3C/svg%3E");
-  background-position: right map-get($spacers, 2) center;
+  background-position: right map-get($spacers, 4) center;
   background-size: $font-size-lg;
   background-repeat: no-repeat;
 }
