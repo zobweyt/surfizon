@@ -19,6 +19,7 @@
   }
 }
 
+// .nav__pill
 .link--section {
   @include motion.transition(xs, background-color, opacity);
 
