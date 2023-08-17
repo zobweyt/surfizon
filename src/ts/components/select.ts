@@ -23,6 +23,11 @@ export class Select extends Dropdown {
       </div>`;
   }
 
+  private get selectedOption() {
+    // TODO: Set this value in `selectOption`. That will speed up operations.
+    return this.menu.querySelector<HTMLElement>(".dropdown__menu__action.active");
+  }
+
   constructor(target: HTMLSelectElement) {
     super(wrap(target, "select"));
   }
@@ -44,11 +49,18 @@ export class Select extends Dropdown {
     });
   }
 
+  public override show(): void {
+    super.show();
+
+    this.selectedOption?.focus()
+  }
+
   private selectOption(option: HTMLElement) {
-    this.menu.querySelector(".dropdown__menu__action.active")?.classList.remove("active");
+    this.selectedOption?.classList.remove("active");
     this.select.value = option.dataset.value!; // ! That would not change the value at all in event.
-    this.control.textContent = option.textContent;
+    this.toggler.textContent = option.textContent;
     option.classList.add("active");
+    (document.activeElement as HTMLElement).blur();
 
     this.hide();
   }

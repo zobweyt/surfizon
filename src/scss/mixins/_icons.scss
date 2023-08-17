@@ -2,6 +2,7 @@
 
 @mixin icon-font {
   font-family: variables.$font-family-icons;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: variables.$icon-size;

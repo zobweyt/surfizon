@@ -1,6 +1,6 @@
 import { Options as PopperOptions } from "@popperjs/core";
 
-export const popperOptions: PopperOptions = {
+export const POPPER_OPTIONS: PopperOptions = {
   placement: "bottom-start",
   strategy: "absolute",
   modifiers: [
@@ -24,6 +24,9 @@ export const popperOptions: PopperOptions = {
     },
   ],
 };
+
+export const TABINDEX_FIXED = -1;
+export const TABINDEX_FOCUSABLE = 0;
 
 export const wrap = (element: HTMLElement, cls: string) => {
   const wrapper = document.createElement("div");

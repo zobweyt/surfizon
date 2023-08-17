@@ -1,4 +1,4 @@
-export abstract class BaseComponent {
+export abstract class Component {
   protected readonly element: HTMLElement;
 
   constructor(element: HTMLElement) {
@@ -10,4 +10,8 @@ export abstract class BaseComponent {
 
   protected abstract render(): void;
   protected abstract initialize(): void;
+
+  public destroy(): void {
+    this.element.remove();
+  }
 }
