@@ -16,7 +16,7 @@ export class Select extends Dropdown {
 
     return `
       <button type="button" class="btn dropdown__toggle">
-        ${this.select.dataset.placeholder}
+        ${this.select.ariaPlaceholder}
       </button>
       <div class="dropdown__menu">
         ${items.join("")}
@@ -56,19 +56,46 @@ export class Select extends Dropdown {
   }
 
   private selectOption(option: HTMLElement) {
-    this.selectedOption?.classList.remove("active");
-    this.select.value = option.dataset.value!; // ! That would not change the value at all in event.
-    this.toggler.textContent = option.textContent;
-    option.classList.add("active");
-    (document.activeElement as HTMLElement).blur();
+    if (!this.select.multiple) {
+      this.selectedOption?.classList.remove("active");
+    }
 
-    this.hide();
+    this.select.value = option.dataset.value!; // ! That would not change the value at all in event.
+    
+    if (this.select.multiple) {
+      option.classList.toggle("active");
+    } else {
+      option.classList.add("active");
+    }
+
+    if (this.select.multiple) {
+      const selectedOptions = Array.from(this.actions).filter((option) => option.classList.contains("active"));
+      const values = selectedOptions.map((option) => option.textContent?.trim());
+      const joinedValues = values.join(', ');
+      if (selectedOptions.length === 0) {
+        this.toggler.textContent = this.select.ariaPlaceholder;
+      } else {
+        this.toggler.textContent = joinedValues;
+      }
+    } else {
+      this.toggler.textContent = option.textContent;
+    }
+    
+    if (!this.select.multiple) {
+      (document.activeElement as HTMLElement).blur();
+      this.hide();
+    }
   }
 
   private optionClicked(event: Event): void {
     event.preventDefault();
 
     const option = event.currentTarget as HTMLElement;
+
+    if (this.select.multiple) {
+      this.selectOption(option);
+      return;
+    }
 
     if (!option.classList.contains("active")) {
       this.selectOption(option);

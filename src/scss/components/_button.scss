@@ -5,7 +5,7 @@
 
 .btn {
   @include buttons.button-variant(variables.$white, variables.$muted);
-  @include motion.transition(xs, box-shadow, background-color, scale, outline-width);
+  @include motion.transition(xs, box-shadow, background-color, scale, outline-offset);
 
   display: inline-flex;
   align-items: center;

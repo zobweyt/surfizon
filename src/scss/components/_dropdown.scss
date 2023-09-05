@@ -10,7 +10,7 @@
   &__menu {
     @include borders.border;
     @include motion.glassmorphism(variables.$white);
-    @include motion.transition(sm, scale, opacity, box-shadow, transform);
+    @include motion.transition(sm, scale, opacity, box-shadow);
 
     position: absolute;
     z-index: variables.$zindex-dropdown;
@@ -18,9 +18,7 @@
     padding: variables.$dropdown-menu-padding 0;
     width: max-content;
     opacity: 0;
-    transform-origin: top;
-    pointer-events: none;
-    scale: variables.$component-active-scale;
+    scale: 0;
 
     &__item {
       display: flex;
@@ -36,12 +34,14 @@
     }
 
     &__action {
-      @include motion.transition(xs, background-color, scale, opacity, outline-width);
+      @include motion.transition(xs, background-color, scale, opacity, outline-offset);
 
       color: inherit;
       user-select: none;
 
-      &:hover {
+      // &:not(.active) {
+      &:hover,
+      &:focus-visible {
         background-color: rgba(variables.$light, variables.$glassmorphism-shade-percentage);
       }
 
@@ -49,6 +49,8 @@
         opacity: variables.$component-active-opacity;
         scale: variables.$component-active-scale;
       }
+
+      // }
 
       &.active {
         font-weight: map.get(variables.$font-weights, medium);
@@ -63,7 +65,6 @@
       box-shadow: variables.$box-shadow-lg;
       opacity: 1;
       transition-duration: map.get(variables.$durations, md);
-      pointer-events: auto;
       scale: 1;
     }
   }

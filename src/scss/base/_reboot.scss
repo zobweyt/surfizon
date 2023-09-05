@@ -11,6 +11,11 @@
   box-sizing: border-box;
 }
 
+*:focus-visible {
+  outline: variables.$dark, solid, 2px;
+  outline-offset: 2px;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -123,7 +128,7 @@ sup {
 }
 
 a {
-  @include motion.transition(xs, color, opacity, outline-width);
+  @include motion.transition(xs, color, opacity, outline-offset);
 
   border-radius: variables.$border-radius-sm;
   text-decoration: none;

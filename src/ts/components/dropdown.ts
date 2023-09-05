@@ -111,9 +111,27 @@ export class Dropdown extends Component {
       strategy: "absolute",
       modifiers: [
         {
+          name: "origin",
+          enabled: true,
+          phase: "main",
+          fn: ({ state }) =>  {
+            const translationMap: Record<string, string> = {
+              top: 'bottom',
+              bottom: 'top',
+              end: 'right',
+              start: 'left',
+            };
+            
+            const origin = (state.placement as string).replace(/\b\w+\b/g, match => translationMap[match] || match).replace('-', ' ');
+            
+            state.elements.popper.style.transformOrigin = origin;
+            return state;
+          }
+        },
+        {
           name: "computeStyles",
           options: {
-            adaptive: false,
+            gpuAcceleration: false
           },
         },
         {
